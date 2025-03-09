@@ -29,9 +29,9 @@ import {
 const data = {
   teams: [
     {
-      name: "Valentines Day",
-      logo: GalleryVerticalEnd,
-      plan: "NUSC Welfare Projects",
+      name: "Timmy Adventures",
+      logo: RocketLauncg,
+      plan: "NUSC Impact Experience Project",
     }
   ],
   navMain: [
