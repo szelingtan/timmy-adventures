@@ -7,7 +7,7 @@ import {
   Bot,
   Command,
   Users,
-  GalleryVerticalEnd,
+  Rocket,
   Map,
   PieChart,
   Settings2,
