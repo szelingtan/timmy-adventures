@@ -33,6 +33,12 @@ const data = {
       logo: Rocket,
       plan: "NUSC Impact Experience Project",
     }
+    // new
+    {
+      name: "Team Explorers",
+      logo: Map, // Using an icon you already have imported
+      plan: "New Adventure Team",
+    }
   ],
   navMain: [
     {
