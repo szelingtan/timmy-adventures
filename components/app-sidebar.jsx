@@ -30,7 +30,7 @@ const data = {
   teams: [
     {
       name: "Timmy Adventures",
-      logo: RocketLaunch,
+      logo: Rocket,
       plan: "NUSC Impact Experience Project",
     }
   ],
