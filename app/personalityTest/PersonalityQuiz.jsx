@@ -3,31 +3,35 @@
 import { useState } from "react";
 
 const questions = [
+  // Question - WCR Option
   {
-    question: "The bears want to grab breakfast. What’s your go-to order?",
-    imgSrc: "./PersonalityQuizImages/Breakfast.png",
+    question: "Why not cars? It’s so convenient — and there’s aircon! ",
+    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "Pancakes, syrup, and ALL the toppings", type: "Grizz" },
-      { text: "Black coffee, no sugar", type: "IceBear" },
-      { text: "A cute acai bowl you can post on Insta", type: "Panda" },
+      { text: "Walking keeps me healthy!", type: "Grizz" },
+      { text: "Public transport is eco-friendly!", type: "IceBear" },
+      { text: "Traffic jams are so annoying!", type: "Panda" },
+      { text: "My family does not have a car.", type: "Panda" },
     ],
   },
+  // Question - Zoo
   {
-    question: "Grizz suggests a group selfie. What’s your reaction?",
-    imgSrc: "./PersonalityQuizImages/Selfie.jpg",
+    question: "School’s finally over, let’s head to the zoo to play! How do you want to go there?",
+    imgSrc: "./PersonalityQuizImages/ZOO.png",
     options: [
-      { text: "Spend 5 minutes finding the right angle and lighting", type: "Panda" },
-      { text: "Quietly stand in the back with a neutral expression", type: "IceBear" },
-      { text: "Strike a silly pose and yell 'CHEESE!'", type: "Grizz" },
+      { text: "Let me call my parents to drive us there!", type: "Panda" },
+      { text: "Public transport is the way to go!", type: "IceBear" },
+      { text: "Are those bikes? Let’s rent them and cycle there!", type: "Grizz" },
     ],
   },
+  // Question - Zoo WCR Option
   {
-    question: "It’s your turn to choose an activity for the day.\nWhat do you pick?",
-    imgSrc: "./PersonalityQuizImages/Activity.jpg",
+    question: "What about cars? Are you sure you want to take the public transport, walk or cycle there?",
+    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "Ice skating at a local rink", type: "IceBear" },
-      { text: "A wild hiking adventure", type: "Grizz" },
-      { text: "A cozy movie marathon", type: "Panda" },
+      { text: "Of course, that’s more eco-friendly!", type: "IceBear" },
+      { text: "If we take the car, the traffic jam is gonna be bad...", type: "Grizz" },
+      { text: "I’d love to take the car, but my family doesn’t own one.", type: "Panda" },
     ],
   },
   {
@@ -118,7 +122,7 @@ export default function PersonalityQuiz() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 text-center bg-white shadow-lg rounded-lg">
+    <div className="max-w-xl mx-auto p-6 text-center bg-[#F6EEEE] shadow-lg rounded-lg">
       {showResults ? (
         <div>
           <h2 className="text-3xl font-bold">You’re most like {results[getResult()].bear}!</h2>
@@ -140,13 +144,17 @@ export default function PersonalityQuiz() {
             ></div>
           </div>
           <img src={questions[currentQuestion].imgSrc} className="rounded-2xl"/>
-          <h2 className="text-[18px] font-semibold mb-4 mt-4 whitespace-pre-line">{questions[currentQuestion].question}</h2>
+
+          <div className="relative w-full bg-[#F9DD81] rounded-full h-16 mb-6 mt-4 text-center flex items-center justify-center font-bold px-4 border-4 border-[#F9DD81]">
+            {questions[currentQuestion].question}
+          </div>
+
           <div className="flex flex-col gap-4">
             {questions[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerClick(option.type)}
-                className="bg-[#f2f2f2] px-4 py-2 rounded-md hover:shadow-lg transition transform hover:translate-y-[-4px]"
+                className="bg-[#BFF3F9] px-4 py-2 rounded-md hover:shadow-lg transition transform hover:translate-y-[-4px]"
 
               >
                 {option.text}
