@@ -4,7 +4,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import ActivityCards from "@/app/game/ActivityCards";
+import ActivityCards from "@/app/how_to_play/ActivityCards";
 
 // Because this is now a Server Component, we can fetch data directly here
 export default function ActivityPage() {
