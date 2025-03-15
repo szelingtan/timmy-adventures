@@ -19,7 +19,7 @@ const questions = [
     question: "Cars? I prefer enviro-maxxing and taking public transport!  Why would you even take cars?",
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "It's faster that way!, type: "Grizz" },
+      { text: "It's faster that way!", type: "Grizz" },
       { text: "I still need to walk if I take public transport...", type: "IceBear" },
       { text: "My parents offered to drop me off, so why not!", type: "Panda" },
       { text: "Public transport is just... uncomfortable.", type: "Panda" },
