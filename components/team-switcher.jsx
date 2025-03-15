@@ -42,9 +42,9 @@ export function TeamSwitcher({
         </div>
         <div className="grid flex-1 text-left text-sm leading-tight">
           <span className="truncate font-semibold">
-            Valentines Day
+            Timmy Adventues
           </span>
-          <span className="truncate text-xs">NUS College Welfare</span>
+          <span className="truncate text-xs">NUSC Impact Experience Project</span>
         </div>
       </SidebarMenuButton>
     </Link>
