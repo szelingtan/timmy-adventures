@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sidebar";
 
 export function AppSidebar({ ...props }) {
-  // Use state for teams to ensure reactivity
+  // not sure why this is not updating
   const [teams, setTeams] = React.useState([
     {
       name: "Timmy Adventures",
