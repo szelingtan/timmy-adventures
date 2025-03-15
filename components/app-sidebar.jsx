@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sidebar";
 
 export function AppSidebar({ ...props }) {
-  // not sure why this is not updating
+  // ignore this 
   const [teams, setTeams] = React.useState([]);
 
   React.useEffect(() => {
@@ -39,18 +39,18 @@ export function AppSidebar({ ...props }) {
 
   const navMain = [
     {
-      title: "Activities",
-      url: "/activities",
+      title: "How to Play",
+      url: "/how_to_play",
       icon: Map,
     },
     {
-      title: "Prizes",
-      url: "/prizes",
-      icon: Trophy,
+      title: "Reflections",
+      url: "/reflections",
+      icon: Rocket,
     },
     {
-      title: "Personality Test",
-      url: "/personalityTest",
+      title: "Game",
+      url: "/game",
       icon: Bot,
     },
     {
