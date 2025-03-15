@@ -6,7 +6,7 @@ const questions = [
   // Question - Good Morning (Introduction)
   {
     question: "Good Morning! How do you want to go to school today?",
-    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
+    imgSrc: "./PersonalityQuizImages/INTRO.png",
     options: [
       { text: "Car, for sure!", type: "Grizz" },
       { text: "Bus, of course!", type: "IceBear" },
@@ -17,7 +17,7 @@ const questions = [
   // Question - Car Option
   {
     question: "Cars? I prefer enviro-maxxing and taking public transport!  Why would you even take cars?",
-    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
+    imgSrc: "./PersonalityQuizImages/CAR_OPTION.png",
     options: [
       { text: "It's faster that way!", type: "Grizz" },
       { text: "I still need to walk if I take public transport...", type: "IceBear" },
