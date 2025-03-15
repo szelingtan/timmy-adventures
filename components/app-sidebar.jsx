@@ -56,7 +56,7 @@ const data = {
       icon: Bot,
     },
     {
-      title: "Feedback Form",
+      title: "Feedback Form on SMG Experience",
       url: "https://docs.google.com/forms/d/e/1FAIpQLSeQidImhy-AMvD1EA6pekT_myMdsx3hEqVUq2sr9Xu1U8Ak1A/viewform", 
       icon: BookOpen,
     },
