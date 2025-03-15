@@ -41,11 +41,6 @@ const data = {
       icon: Map,
     },
     {
-      title: "Groups",
-      url: "/groups",
-      icon: Users,
-    },
-    {
       title: "Prizes",
       url: "/prizes",
       icon: Trophy,
