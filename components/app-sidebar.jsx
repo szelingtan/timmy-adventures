@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -12,29 +12,28 @@ import {
   PieChart,
   Settings2,
   SquareTerminal,
-  Trophy
-} from "lucide-react"
+  Trophy,
+} from "lucide-react";
 
-import { NavMain } from "@/components/nav-main"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@/components/nav-main";
+import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
-  SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-// This is sample data.
-const data = {
-  teams: [
+export function AppSidebar({ ...props }) {
+  // Use state for teams to ensure reactivity
+  const [teams, setTeams] = React.useState([
     {
       name: "Timmy Adventures",
       logo: Rocket,
       plan: "NUSC Impact Experience Project",
-    }
-  ],
-  navMain: [
+    },
+  ]);
+
+  const navMain = [
     {
       title: "Activities",
       url: "/activities",
@@ -52,48 +51,19 @@ const data = {
     },
     {
       title: "SMG Feedback Form",
-      url: "https://docs.google.com/forms/d/e/1FAIpQLSeQidImhy-AMvD1EA6pekT_myMdsx3hEqVUq2sr9Xu1U8Ak1A/viewform", 
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSeQidImhy-AMvD1EA6pekT_myMdsx3hEqVUq2sr9Xu1U8Ak1A/viewform",
       icon: BookOpen,
     },
-    // {
-    //   title: "Settings",
-    //   url: "#",
-    //   icon: Settings2,
-    //   items: [
-    //     {
-    //       title: "General",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Team",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Billing",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Limits",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
-  ]
-}
+  ];
 
-export function AppSidebar({
-  ...props
-}) {
   return (
-    (<Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={navMain} />
       </SidebarContent>
-      {/* <SidebarFooter>
-      </SidebarFooter> */}
-    </Sidebar>)
+    </Sidebar>
   );
 }
