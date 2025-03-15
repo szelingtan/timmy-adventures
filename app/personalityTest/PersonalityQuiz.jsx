@@ -13,6 +13,7 @@ const questions = [
       { text: "Train is the way to go!", type: "Panda" },
       { text: "Let's walk", type: "Panda" },
     ],
+  },
   // Question - Car Option
   {
     question: "Cars? I prefer enviro-maxxing and taking public transport!  Why would you even take cars?",
