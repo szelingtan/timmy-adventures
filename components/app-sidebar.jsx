@@ -25,13 +25,17 @@ import {
 
 export function AppSidebar({ ...props }) {
   // not sure why this is not updating
-  const [teams, setTeams] = React.useState([
-    {
-      name: "Timmy Adventures",
-      logo: Rocket,
-      plan: "NUSC Impact Experience Project",
-    },
-  ]);
+  const [teams, setTeams] = React.useState([]);
+
+  React.useEffect(() => {
+    setTeams([
+      {
+        name: "Timmy Adventures",
+        logo: Rocket,
+        plan: "NUSC Impact Experience Project",
+      }
+    ]);
+  }, []); // Updates once when the component mounts
 
   const navMain = [
     {
