@@ -3,9 +3,30 @@
 import { useState } from "react";
 
 const questions = [
+  // Question - Good Morning (Introduction)
+  {
+    question: "Good Morning! How do you want to go to school today?",
+    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
+    options: [
+      { text: "Car, for sure!", type: "Grizz" },
+      { text: "Bus, of course!", type: "IceBear" },
+      { text: "Train is the way to go!", type: "Panda" },
+      { text: "Let's walk", type: "Panda" },
+    ],
+  // Question - Car Option
+  {
+    question: "Cars? I prefer enviro-maxxing and taking public transport!  Why would you even take cars?",
+    imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
+    options: [
+      { text: "It's faster that way! type: "Grizz" },
+      { text: "I still need to walk if I take public transport...", type: "IceBear" },
+      { text: "My parents offered to drop me off, so why not!", type: "Panda" },
+      { text: "Public transport is just... uncomfortable.", type: "Panda" },
+    ],
+  },
   // Question - WCR Option
   {
-    question: "Why not cars? It’s so convenient — and there’s aircon! ",
+    question: "Why not cars? It’s so convenient — and there’s aircon!",
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
       { text: "Walking keeps me healthy!", type: "Grizz" },
@@ -32,42 +53,6 @@ const questions = [
       { text: "Of course, that’s more eco-friendly!", type: "IceBear" },
       { text: "If we take the car, the traffic jam is gonna be bad...", type: "Grizz" },
       { text: "I’d love to take the car, but my family doesn’t own one.", type: "Panda" },
-    ],
-  },
-  {
-    question: "You come across a stray puppy! What do you do?",
-    imgSrc: "./PersonalityQuizImages/Puppy.png",
-    options: [
-      { text: "Try to name it something cool and make it your adventure buddy", type: "Grizz" },
-      { text: "Take pics and post them to find its owner", type: "Panda" },
-      { text: "Build it a tiny shelter and care for it", type: "IceBear" },
-    ],
-  },
-  {
-    question: "The bears start arguing. How do you handle it?",
-    imgSrc: "./PersonalityQuizImages/Argument.jpg",
-    options: [
-      { text: "Jump in and hype everyone up for a group hug", type: "Grizz" },
-      { text: "Say something cool and mysterious to break the tension", type: "IceBear" },
-      { text: "Awkwardly try to mediate, but you’re low-key stressed", type: "Panda" },
-    ],
-  },
-  {
-    question: "It’s lunch time! What’s your ideal meal?",
-    imgSrc: "./PersonalityQuizImages/Lunch.jpg",
-    options: [
-      { text: "Sushi or something aesthetic", type: "Panda" },
-      { text: "A giant burger with fries", type: "Grizz" },
-      { text: "Home-cooked stew you made yourself", type: "IceBear" },
-    ],
-  },
-  {
-    question: "The day is ending, and you have one last chance to chill with the bears. What’s your move?",
-    imgSrc: "./PersonalityQuizImages/Chilling.jpg",
-    options: [
-      { text: "Quietly enjoy the stars while sipping tea", type: "IceBear" },
-      { text: "Crack jokes around a campfire", type: "Grizz" },
-      { text: "Snap a photo for your scrapbook", type: "Panda" },
     ],
   },
 ];
