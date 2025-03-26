@@ -29,7 +29,7 @@ function PersonalityTestOpen({ onStart }) {
 }
 
 export function PersonalityTestPage() {
-  const [quizStarted, setQuizStarted] = useState(false); // Track state
+  const [quizStarted, setQuizStarted] = useState(true); // Track state
 
   return (
     <SidebarProvider>
