@@ -74,30 +74,12 @@ const zoo = {
       { text: "I’d love to take the car, but my family doesn’t own one.", followup: "noFollowUp", rationale: "parents" },
     ],
   }
-}
+};
 
 const questions = [
   goodMorning,
   zoo
 ];
-
-const results = [
-    {
-       bear: "Grizz",
-       imgSrc: "./PersonalityQuizImages/Grizz.png",
-       descr: "You’re energetic, adventurous, and love bringing people together. You’re the ultimate hype person!",
-    },
-    {
-        bear: "Panda",
-        imgSrc: "./PersonalityQuizImages/Panda.png",
-        descr: "You’re sweet, a little shy, and super relatable. You care about others and have a soft spot for aesthetic vibes.",
-    },
-    {
-        bear: "Ice Bear",
-        imgSrc: "./PersonalityQuizImages/IceBear.png",
-        descr: "You’re calm, independent, and always prepared. You have a mysterious coolness and a heart of gold beneath it.",
-    },
-]
 
 export default function PersonalityQuiz() {
   // current question idx and question id
@@ -111,10 +93,13 @@ export default function PersonalityQuiz() {
   const handleAnswerClick = (opt) => {
     if ("rationale" in opt) {
       setRationaleScores((prevs) => {
-        const updatedRationalScores = {
+        const updatedRationaleScores = {
           ...prevs,
           [opt.rationale]: prevs[opt.rationale] + 1,
         };
+
+        console.log("Updated rationales:", updatedRationaleScores);
+        return updatedRationaleScores;
       })
     }
 
@@ -124,12 +109,13 @@ export default function PersonalityQuiz() {
           ...prevScores,
           [opt.followup]: prevScores[opt.followup] + 1,
         };
-    
-        console.log("Updated Scores:", updatedScores); // ✅ Logs scores after update
 
         setCurrQ((prev) => {
-          return {idx: prev.idx, question: opt.followup}
+          return {idx: prev.idx, question: opt.followup};
         });
+
+
+        console.log("Updated option selections:", updatedScores); // ✅ Logs scores after update
     
         return updatedScores;
       });
@@ -142,13 +128,6 @@ export default function PersonalityQuiz() {
         setShowResults(true);
       }
     }
-  };
-
-  const getResult = () => {
-    const maxScore = Math.max(scores.Grizz, scores.Panda, scores.IceBear);
-    if (scores.Grizz === maxScore) return 0;
-    if (scores.Panda === maxScore) return 1;
-    return 2;
   };
 
   return (
@@ -180,7 +159,7 @@ export default function PersonalityQuiz() {
           </div>
 
           <div className="flex flex-col gap-4">
-            {questions[currQ.idx][currQ.question].options.map((opt) => (
+            {questions[currQ.idx][currQ.question].options.map((opt, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerClick(opt)}
