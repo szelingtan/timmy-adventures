@@ -73,7 +73,7 @@ const zoo = {
       { text: "If we take the car, the traffic jam is gonna be bad...", followup: "noFollowUp", rationale: "speed" },
       { text: "I’d love to take the car, but my family doesn’t own one.", followup: "noFollowUp", rationale: "parents" },
     ],
-  }
+  },
 };
 
 const questions = [
