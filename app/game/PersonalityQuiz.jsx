@@ -9,6 +9,7 @@ import { useState } from "react";
  *    .imgSrc (relative img link)
  *    .options:
  *        .text (option text),
+ *        .transport (transport type used)
  *        .followup (ID of followup question, or 'noFollowUp' to go to the next question block)
  * 
  * Afterwards, feedback questions:
@@ -27,10 +28,10 @@ const goodMorning = {
     question: "Good Morning! How do you want to go to school today?",
     imgSrc: "./PersonalityQuizImages/INTRO.png",
     options: [
-      { text: "Car, for sure!", followup: "carOption" },
-      { text: "Bus, of course!", followup: "WCROption" },
-      { text: "Train is the way to go!", followup: "WCROption" },
-      { text: "Let's walk", followup: "WCROption" },
+      { text: "Car, for sure!", transport: "Car", followup: "carOption" },
+      { text: "Bus, of course!", transport: "WCR", followup: "WCROption" },
+      { text: "Train is the way to go!", transport: "WCR", followup: "WCROption" },
+      { text: "Let's walk", transport: "WCR", followup: "WCROption" },
     ],
   },
   carOption: {
@@ -60,9 +61,9 @@ const zoo = {
     question: "School’s finally over, let’s head to the zoo to play! How do you want to go there?",
     imgSrc: "./PersonalityQuizImages/ZOO.png",
     options: [
-      { text: "Let me call my parents to drive us there!", followup: "noFollowUp" },
-      { text: "Public transport is the way to go!", followup: "WCROption" },
-      { text: "Are those bikes? Let’s rent them and cycle there!", followup: "WCROption" },
+      { text: "Let me call my parents to drive us there!", transport: "Car", followup: "noFollowUp" },
+      { text: "Public transport is the way to go!", transport: "WCR", followup: "WCROption" },
+      { text: "Are those bikes? Let’s rent them and cycle there!", transport: "WCR", followup: "WCROption" },
     ],
   },
   WCROption:   {
@@ -84,7 +85,7 @@ const questions = [
 export default function PersonalityQuiz() {
   // current question idx and question id
   const [currQ, setCurrQ] = useState({ idx: 0, question: 'initialQuestion' });
-  const [optScores, setOptScores] = useState({ WCROption: 0, carOption: 0 });
+  const [optScores, setOptScores] = useState({ Car: 0, WCR: 0 });
   const [rationaleScores, setRationaleScores] = useState({
     health: 0, eco: 0, speed: 0, parents: 0, convenience: 0, comfort: 0,
   });
@@ -97,36 +98,31 @@ export default function PersonalityQuiz() {
           ...prevs,
           [opt.rationale]: prevs[opt.rationale] + 1,
         };
-
-        console.log("Updated rationales:", updatedRationaleScores);
         return updatedRationaleScores;
       })
     }
 
-    if (opt.followup != 'noFollowUp') {
+    if ("transport" in opt) {
       setOptScores((prevScores) => {
+        console.log(prevScores);
         const updatedScores = {
           ...prevScores,
-          [opt.followup]: prevScores[opt.followup] + 1,
+          [opt.transport]: prevScores[opt.transport] + 1,
         };
-
-        setCurrQ((prev) => {
-          return {idx: prev.idx, question: opt.followup};
-        });
-
-
-        console.log("Updated option selections:", updatedScores); // ✅ Logs scores after update
-    
         return updatedScores;
       });
+    }
+
+    if (opt.followup != 'noFollowUp') {
+      setCurrQ((prev) => {
+        return {idx: prev.idx, question: opt.followup};
+      });
+    } else if (currQ.idx < questions.length - 1) {
+      setCurrQ((prev) => {
+        return {idx: prev.idx + 1, question: 'initialQuestion'};
+      });
     } else {
-      if (currQ.idx < questions.length - 1) {
-        setCurrQ((prev) => {
-          return {idx: prev.idx + 1, question: 'initialQuestion'};
-        });
-      } else {
-        setShowResults(true);
-      }
+      setShowResults(true);
     }
   };
 
@@ -134,15 +130,27 @@ export default function PersonalityQuiz() {
     <div className="max-w-xl mx-auto p-6 text-center bg-[#F6EEEE] shadow-lg rounded-lg">
       {showResults ? (
         <div>
-          <h2 className="text-3xl font-bold">You’re most like {results[getResult()].bear}!</h2>
-          <img 
-                src={results[getResult()].imgSrc} 
-                alt="Bear Result"
-                className="mx-auto md:w-1/2"
-            />
-          <p className="mt-4 text-lg">
-            {results[getResult()].descr}
-          </p>
+          <div>
+            <h1 className="text-3xl font-bold">Thank you for participating in Timmy's Adventures!</h1>
+          </div>
+          <br/>
+          <div>
+            <h2 className="text-xl"> You prioritized modes of transport in different scenarios:</h2>
+            {Object.entries(optScores).map(([transportType, timesSelected], idx) => {
+              if (timesSelected !== 0) {
+                return (<h3 key={idx}>{transportType}: {timesSelected} scenario{timesSelected !== 1 && 's'} </h3>);
+              }
+            })}
+          </div>
+          <br/>
+          <div>
+            <h2 className="text-xl"> You prioritized different aspects when selecting your mode of transport:</h2>
+              {Object.entries(rationaleScores).map(([k, v], idx) => {
+                if (v !== 0) {
+                  return (<h3 key={idx}>{k}: {v} scenario{v !== 1 && 's'} </h3>);
+                }
+              })}
+          </div>
         </div>
       ) : (
         <div>

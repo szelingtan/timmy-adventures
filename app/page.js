@@ -13,7 +13,7 @@ function SMGScenariosIntro({ onStart }) {
   return (
     <div className="bg-[#f4f5f5] bg-cover bg-center flex flex-col items-center justify-center p-6">
       <h1 className="text-4xl font-semibold text-[#171717] mb-10 text-center">
-        Timmy Adventures
+        Timmy Adventures!
       </h1>
       <h2 className="text-xl text-[#171717] mb-10 text-center">
         Let us explore a day in the life of Timmy and his fantastical adventures!
@@ -34,13 +34,11 @@ export default function Page() {
       {//</AppSidebar>
       }
       <SidebarInset className="bg-cover bg-center bg-[url('/FrontPageMobile.png')] md:bg-[url('/FrontPage.png')]">
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1 bg-white" />
-          </div>
-        </header>
+        <div className="flex items-center gap-2 px-4">
+          <SidebarTrigger className="-ml-1 bg-white" />
+        </div>
         <div className="px-6 pb-6">
-        <SMGScenariosIntro/>
+          <SMGScenariosIntro/>
         </div>
       </SidebarInset>
     </SidebarProvider>
