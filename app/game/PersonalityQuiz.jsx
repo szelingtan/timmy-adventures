@@ -30,7 +30,7 @@ const goodMorning = {
       { text: "Car, for sure!", followup: "carOption" },
       { text: "Bus, of course!", followup: "WCROption" },
       { text: "Train is the way to go!", followup: "WCROption" },
-      { text: "Let's walk", type: "WCROption" },
+      { text: "Let's walk", followup: "WCROption" },
     ],
   },
   carOption: {
@@ -77,18 +77,8 @@ const zoo = {
 }
 
 const questions = [
-  // Question - Good Morning (Introduction, going to school)
-  {
-    
-  },
-  // Question - Car Option
-  ,
-  // Question - WCR Option
-
-  // Question - Zoo
-  ,
-  // Question - Zoo WCR Option
-,
+  goodMorning,
+  zoo
 ];
 
 const results = [
@@ -110,26 +100,47 @@ const results = [
 ]
 
 export default function PersonalityQuiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [scores, setScores] = useState({ Grizz: 0, Panda: 0, IceBear: 0 });
+  // current question idx and question id
+  const [currQ, setCurrQ] = useState({ idx: 0, question: 'initialQuestion' });
+  const [optScores, setOptScores] = useState({ WCROption: 0, carOption: 0 });
+  const [rationaleScores, setRationaleScores] = useState({
+    health: 0, eco: 0, speed: 0, parents: 0, convenience: 0, comfort: 0,
+  });
   const [showResults, setShowResults] = useState(false);
 
-  const handleAnswerClick = (type) => {
-    setScores((prevScores) => {
-      const updatedScores = {
-        ...prevScores,
-        [type]: prevScores[type] + 1,
-      };
-  
-      console.log("Updated Scores:", updatedScores); // ✅ Logs scores after update
-  
-      return updatedScores;
-    });
+  const handleAnswerClick = (opt) => {
+    if ("rationale" in opt) {
+      setRationaleScores((prevs) => {
+        const updatedRationalScores = {
+          ...prevs,
+          [opt.rationale]: prevs[opt.rationale] + 1,
+        };
+      })
+    }
 
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
+    if (opt.followup != 'noFollowUp') {
+      setOptScores((prevScores) => {
+        const updatedScores = {
+          ...prevScores,
+          [opt.followup]: prevScores[opt.followup] + 1,
+        };
+    
+        console.log("Updated Scores:", updatedScores); // ✅ Logs scores after update
+
+        setCurrQ((prev) => {
+          return {idx: prev.idx, question: opt.followup}
+        });
+    
+        return updatedScores;
+      });
     } else {
-      setShowResults(true);
+      if (currQ.idx < questions.length - 1) {
+        setCurrQ((prev) => {
+          return {idx: prev.idx + 1, question: 'initialQuestion'};
+        });
+      } else {
+        setShowResults(true);
+      }
     }
   };
 
@@ -159,24 +170,23 @@ export default function PersonalityQuiz() {
           <div className="relative w-full bg-gray-300 rounded-full h-3 mb-6">
             <div
               className="bg-[#171717] h-3 rounded-full"
-              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              style={{ width: `${((currQ.idx + 1) / questions.length) * 100}%` }}
             ></div>
           </div>
-          <img src={questions[currentQuestion].imgSrc} className="rounded-2xl"/>
+          <img src={questions[currQ.idx][currQ.question].imgSrc} className="rounded-2xl"/>
 
           <div className="relative w-full bg-[#F9DD81] rounded-full h-16 mb-6 mt-4 text-center flex items-center justify-center font-bold px-4 border-4 border-[#F9DD81]">
-            {questions[currentQuestion].question}
+            {questions[currQ.idx][currQ.question].question}
           </div>
 
           <div className="flex flex-col gap-4">
-            {questions[currentQuestion].options.map((option, index) => (
+            {questions[currQ.idx][currQ.question].options.map((opt) => (
               <button
                 key={index}
-                onClick={() => handleAnswerClick(option.type)}
+                onClick={() => handleAnswerClick(opt)}
                 className="bg-[#BFF3F9] px-4 py-2 rounded-md hover:shadow-lg transition transform hover:translate-y-[-4px]"
-
               >
-                {option.text}
+                {opt.text}
               </button>
             ))}
           </div>
