@@ -16,6 +16,7 @@ export default function Page() {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 bg-white" />
           </div>
+          Hello there
         </header>
       </SidebarInset>
     </SidebarProvider>
