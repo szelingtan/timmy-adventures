@@ -2,60 +2,93 @@
 
 import { useState } from "react";
 
-const questions = [
-  // Question - Good Morning (Introduction)
-  {
+
+/* Question Format specs per question block:
+ * .initialQuestion:
+ *    .question (text)
+ *    .imgSrc (relative img link)
+ *    .options:
+ *        .text (option text),
+ *        .followup (ID of followup question, or 'noFollowUp' to go to the next question block)
+ * 
+ * Afterwards, feedback questions:
+ * .ID (set this ID yourself)
+ *    .question (text)
+ *    .imgSrc (relative img link)
+ *    .options:
+ *        .text (option text),
+ *        .followup (ID of followup question, or 'noFollowUp' to go to the next question block.
+ *                    Flexibility to ask further feedback questions, BUT avoid infinite loops.)
+ *        .rationale (store result type of follow ups)
+*/
+
+const goodMorning = {
+  initialQuestion: {
     question: "Good Morning! How do you want to go to school today?",
     imgSrc: "./PersonalityQuizImages/INTRO.png",
     options: [
-      { text: "Car, for sure!", type: "Grizz" },
-      { text: "Bus, of course!", type: "IceBear" },
-      { text: "Train is the way to go!", type: "Panda" },
-      { text: "Let's walk", type: "Panda" },
+      { text: "Car, for sure!", followup: "carOption" },
+      { text: "Bus, of course!", followup: "WCROption" },
+      { text: "Train is the way to go!", followup: "WCROption" },
+      { text: "Let's walk", type: "WCROption" },
     ],
   },
-  // Question - Car Option
-  {
+  carOption: {
     question: "Cars? I prefer enviro-maxxing and taking public transport!  Why would you even take cars?",
     imgSrc: "./PersonalityQuizImages/CAR_OPTION.png",
     options: [
-      { text: "It's faster that way!", type: "Grizz" },
-      { text: "I still need to walk if I take public transport...", type: "IceBear" },
-      { text: "My parents offered to drop me off, so why not!", type: "Panda" },
-      { text: "Public transport is just... uncomfortable.", type: "Panda" },
+      { text: "It's faster that way!", followup: "noFollowUp", rationale: "speed" },
+      { text: "I still need to walk if I take public transport...", followup: "noFollowUp", rationale: "convenience"},
+      { text: "My parents offered to drop me off, so why not!", followup: "noFollowUp", rationale: "parents" },
+      { text: "Public transport is just... uncomfortable.", followup: "noFollowUp", rationale: "comfort" },
     ],
   },
-  // Question - WCR Option
-  {
+  WCROption: {
     question: "Why not cars? It’s so convenient — and there’s aircon!",
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "Walking keeps me healthy!", type: "Grizz" },
-      { text: "Public transport is eco-friendly!", type: "IceBear" },
-      { text: "Traffic jams are so annoying!", type: "Panda" },
-      { text: "My family does not have a car.", type: "Panda" },
+      { text: "Walking keeps me healthy!", followup: "noFollowUp", rationale: "health" },
+      { text: "Public transport is eco-friendly!", followup: "noFollowUp", rationale: "eco" },
+      { text: "Traffic jams are so annoying!", followup: "noFollowUp", rationale: "speed" },
+      { text: "My family does not have a car.", followup: "noFollowUp", rationale: "parents" },
     ],
   },
-  // Question - Zoo
-  {
+};
+
+const zoo = {
+  initialQuestion: {
     question: "School’s finally over, let’s head to the zoo to play! How do you want to go there?",
     imgSrc: "./PersonalityQuizImages/ZOO.png",
     options: [
-      { text: "Let me call my parents to drive us there!", type: "Panda" },
-      { text: "Public transport is the way to go!", type: "IceBear" },
-      { text: "Are those bikes? Let’s rent them and cycle there!", type: "Grizz" },
+      { text: "Let me call my parents to drive us there!", followup: "noFollowUp" },
+      { text: "Public transport is the way to go!", followup: "WCROption" },
+      { text: "Are those bikes? Let’s rent them and cycle there!", followup: "WCROption" },
     ],
   },
-  // Question - Zoo WCR Option
-  {
+  WCROption:   {
     question: "What about cars? Are you sure you want to take the public transport, walk or cycle there?",
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "Of course, that’s more eco-friendly!", type: "IceBear" },
-      { text: "If we take the car, the traffic jam is gonna be bad...", type: "Grizz" },
-      { text: "I’d love to take the car, but my family doesn’t own one.", type: "Panda" },
+      { text: "Of course, that’s more eco-friendly!", followup: "noFollowUp", rationale: "eco" },
+      { text: "If we take the car, the traffic jam is gonna be bad...", followup: "noFollowUp", rationale: "speed" },
+      { text: "I’d love to take the car, but my family doesn’t own one.", followup: "noFollowUp", rationale: "parents" },
     ],
+  }
+}
+
+const questions = [
+  // Question - Good Morning (Introduction, going to school)
+  {
+    
   },
+  // Question - Car Option
+  ,
+  // Question - WCR Option
+
+  // Question - Zoo
+  ,
+  // Question - Zoo WCR Option
+,
 ];
 
 const results = [
