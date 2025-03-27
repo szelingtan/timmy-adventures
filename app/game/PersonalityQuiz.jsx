@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-
 /* Question Format specs per question block:
  * .initialQuestion:
  *    .question (text)
@@ -49,7 +48,7 @@ const goodMorning = {
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
       { text: "Walking keeps me healthy!", followup: "noFollowUp", rationale: "health" },
-      { text: "Public transport is eco-friendly!", followup: "noFollowUp", rationale: "eco" },
+      { text: "Public transport is eco-friendly!", followup: "noFollowUp", rationale: "env" },
       { text: "Traffic jams are so annoying!", followup: "noFollowUp", rationale: "speed" },
       { text: "My family does not have a car.", followup: "noFollowUp", rationale: "parents" },
     ],
@@ -70,7 +69,7 @@ const zoo = {
     question: "What about cars? Are you sure you want to take the public transport, walk or cycle there?",
     imgSrc: "./PersonalityQuizImages/WCR_OPTION.png",
     options: [
-      { text: "Of course, that’s more eco-friendly!", followup: "noFollowUp", rationale: "eco" },
+      { text: "Of course, that’s more eco-friendly!", followup: "noFollowUp", rationale: "env" },
       { text: "If we take the car, the traffic jam is gonna be bad...", followup: "noFollowUp", rationale: "speed" },
       { text: "I’d love to take the car, but my family doesn’t own one.", followup: "noFollowUp", rationale: "parents" },
     ],
@@ -82,12 +81,26 @@ const questions = [
   zoo
 ];
 
+const transportDisplayNames = {
+  Car: "Car",
+  WCR: "Walk Cycle Ride",
+};
+
+const rationaleDisplayNames = {
+  health: "Health",
+  env: "Environment",
+  speed: "Speed",
+  parents: "Parents",
+  convenience: "Convenience",
+  comfort: "Comfort",
+};
+
 export default function PersonalityQuiz() {
   // current question idx and question id
   const [currQ, setCurrQ] = useState({ idx: 0, question: 'initialQuestion' });
   const [optScores, setOptScores] = useState({ Car: 0, WCR: 0 });
   const [rationaleScores, setRationaleScores] = useState({
-    health: 0, eco: 0, speed: 0, parents: 0, convenience: 0, comfort: 0,
+    health: 0, env: 0, speed: 0, parents: 0, convenience: 0, comfort: 0,
   });
   const [showResults, setShowResults] = useState(false);
 
@@ -99,12 +112,11 @@ export default function PersonalityQuiz() {
           [opt.rationale]: prevs[opt.rationale] + 1,
         };
         return updatedRationaleScores;
-      })
+      });
     }
 
     if ("transport" in opt) {
       setOptScores((prevScores) => {
-        console.log(prevScores);
         const updatedScores = {
           ...prevScores,
           [opt.transport]: prevScores[opt.transport] + 1,
@@ -113,13 +125,13 @@ export default function PersonalityQuiz() {
       });
     }
 
-    if (opt.followup != 'noFollowUp') {
+    if (opt.followup !== 'noFollowUp') {
       setCurrQ((prev) => {
-        return {idx: prev.idx, question: opt.followup};
+        return { idx: prev.idx, question: opt.followup };
       });
     } else if (currQ.idx < questions.length - 1) {
       setCurrQ((prev) => {
-        return {idx: prev.idx + 1, question: 'initialQuestion'};
+        return { idx: prev.idx + 1, question: 'initialQuestion' };
       });
     } else {
       setShowResults(true);
@@ -133,23 +145,31 @@ export default function PersonalityQuiz() {
           <div>
             <h1 className="text-3xl font-bold">Thank you for participating in Timmy's Adventures!</h1>
           </div>
-          <br/>
+          <br />
           <div>
-            <h2 className="text-xl"> You prioritized modes of transport in different scenarios:</h2>
+            <h2 className="text-xl"> You chose these modes of transport:</h2>
             {Object.entries(optScores).map(([transportType, timesSelected], idx) => {
               if (timesSelected !== 0) {
-                return (<h3 key={idx}>{transportType}: {timesSelected} scenario{timesSelected !== 1 && 's'} </h3>);
+                return (
+                  <h3 key={idx}>
+                    {transportDisplayNames[transportType]}: {timesSelected} scenario{timesSelected !== 1 && 's'}
+                  </h3>
+                );
               }
             })}
           </div>
-          <br/>
+          <br />
           <div>
-            <h2 className="text-xl"> You prioritized different aspects when selecting your mode of transport:</h2>
-              {Object.entries(rationaleScores).map(([k, v], idx) => {
-                if (v !== 0) {
-                  return (<h3 key={idx}>{k}: {v} scenario{v !== 1 && 's'} </h3>);
-                }
-              })}
+            <h2 className="text-xl"> You prioritized these aspects for your choice of transport:</h2>
+            {Object.entries(rationaleScores).map(([k, v], idx) => {
+              if (v !== 0) {
+                return (
+                  <h3 key={idx}>
+                    {rationaleDisplayNames[k]}: {v} scenario{v !== 1 && 's'}
+                  </h3>
+                );
+              }
+            })}
           </div>
         </div>
       ) : (
@@ -160,7 +180,7 @@ export default function PersonalityQuiz() {
               style={{ width: `${((currQ.idx + 1) / questions.length) * 100}%` }}
             ></div>
           </div>
-          <img src={questions[currQ.idx][currQ.question].imgSrc} className="rounded-2xl"/>
+          <img src={questions[currQ.idx][currQ.question].imgSrc} className="rounded-2xl" />
 
           <div className="relative w-full bg-[#F9DD81] rounded-full h-16 mb-6 mt-4 text-center flex items-center justify-center font-bold px-4 border-4 border-[#F9DD81]">
             {questions[currQ.idx][currQ.question].question}
